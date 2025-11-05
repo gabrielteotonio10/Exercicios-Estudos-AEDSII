@@ -1,5 +1,4 @@
 
-
 public class EstruturasFlexiveis {
 
 }
@@ -21,14 +20,16 @@ class Celula {
 }
 
 // Célula dupla
-class CelulaDupla{
+class CelulaDupla {
     public CelulaDupla prox;
     public CelulaDupla ant;
     public int elemento;
-    public CelulaDupla(){
+
+    public CelulaDupla() {
         this(0);
     }
-    public CelulaDupla(int x){
+
+    public CelulaDupla(int x) {
         prox = null;
         ant = null;
         elemento = x;
@@ -124,21 +125,27 @@ class Lista {
     }
 
     public void inserir(int x, int pos) {
-        int tam = tamanho();
-        if (pos > tam || pos < 1)
+        int tam = tamanho(); // Obtém o tamanho da lista
+        if (pos < 1 || pos > tam) // A posição válida deve ser de 1 a tam + 1
             return;
-        else if (pos == tam)
-            inserirFim(x);
-        else if (pos == 1)
-            inserirInicio(x);
+
+        // Caso a posição seja no final
+        if (pos == tam) {
+            inserirFim(x); // Inserir no final
+        }
+        // Caso a posição seja no início
+        else if (pos == 1) {
+            inserirInicio(x); // Inserir no início
+        }
+        // Caso geral: inserir no meio
         else {
-            Celula i = primeiro.prox;
+            Celula i = primeiro; // Começa do primeiro elemento
             for (int j = 1; j < pos; i = i.prox, j++) {
+                // Navega até a posição anterior
             }
-            Celula tmp = i.prox;
-            i.prox = new Celula(x);
-            i.prox.prox = tmp;
-            tmp = i = null;
+            Celula tmp = i.prox; // Guarda o próximo elemento da posição de inserção
+            i.prox = new Celula(x); // Cria o novo elemento e insere
+            i.prox.prox = tmp; // Conecta o próximo elemento à célula recém inserida
         }
     }
 
@@ -153,18 +160,13 @@ class Lista {
     public int removerInicio() {
         if (primeiro == ultimo)
             return -1;
-        int elemento = primeiro.prox.elemento;
-        if (primeiro.prox == ultimo) {
-            Celula tmp = primeiro.prox;
-            primeiro.prox = null;
+        Celula tmp = primeiro.prox;
+        int elemento = tmp.elemento;
+        if (primeiro.prox == ultimo)
             ultimo = primeiro;
-            tmp = null;
-        } else {
-            Celula tmp = primeiro.prox;
-            primeiro.prox = primeiro.prox.prox;
-            tmp.prox = null;
-            tmp = null;
-        }
+        primeiro.prox = tmp.prox;
+        tmp.prox = null;
+        tmp = null;
         return elemento;
     }
 
@@ -172,16 +174,12 @@ class Lista {
         if (primeiro == ultimo)
             return -1;
         int elemento = ultimo.elemento;
-        if (primeiro.prox == ultimo) {
-            primeiro.prox = null;
-            ultimo = primeiro;
-        } else {
-            Celula i;
-            for (i = primeiro.prox; i.prox != ultimo; i = i.prox) {
-            }
-            ultimo = i;
-            i = null;
+        Celula i;
+        for (i = primeiro.prox; i.prox != ultimo; i = i.prox) {
         }
+        ultimo = i;
+        ultimo.prox = null;
+        i = null;
         return elemento;
     }
 
@@ -197,10 +195,11 @@ class Lista {
             elemento = removerFim();
         else {
             Celula i = primeiro;
-            for(int j = 1; j < pos; j++, i = i.prox){}
+            for (int j = 1; j < pos; j++, i = i.prox) {
+            }
             Celula tmp = i.prox;
             elemento = tmp.elemento;
-            i.prox  = i.prox.prox;
+            i.prox = i.prox.prox;
             tmp.prox = tmp = i = null;
         }
         return elemento;
@@ -209,20 +208,20 @@ class Lista {
 }
 
 // Lista dupla
-class ListaDupla{
+class ListaDupla {
     private CelulaDupla primeiro, ultimo;
-    public ListaDupla(){
+
+    public ListaDupla() {
         primeiro = new CelulaDupla();
         ultimo = primeiro;
     }
 
-    public void inserirInicio(int x){
-        if(primeiro == ultimo){
+    public void inserirInicio(int x) {
+        if (primeiro == ultimo) {
             primeiro.prox = new CelulaDupla(x);
             ultimo = primeiro.prox;
             ultimo.ant = primeiro;
-        }
-        else{
+        } else {
             CelulaDupla tmp = new CelulaDupla(x);
             tmp.prox = primeiro.prox;
             primeiro.prox = tmp;
@@ -232,13 +231,12 @@ class ListaDupla{
         }
     }
 
-    public void inserirFim(int x){
-        if(primeiro == ultimo){
+    public void inserirFim(int x) {
+        if (primeiro == ultimo) {
             primeiro.prox = new CelulaDupla(x);
             ultimo = primeiro.prox;
             ultimo.ant = primeiro;
-        }
-        else{
+        } else {
             CelulaDupla tmp = new CelulaDupla(x);
             ultimo.prox = tmp;
             tmp.ant = ultimo;
@@ -246,17 +244,20 @@ class ListaDupla{
         }
     }
 
-    public void inserir(int x, int pos){
-        if(pos < 1 || pos > tamanho())
+    public void inserir(int x, int pos) {
+        if (pos < 1 || pos > tamanho())
             return;
-        if(pos == 1) inserirInicio(x);
-        else if(pos == tamanho()) inserirFim(x);
-        else{
+        if (pos == 1)
+            inserirInicio(x);
+        else if (pos == tamanho())
+            inserirFim(x);
+        else {
             CelulaDupla i = primeiro;
-            for(int j = 0; j < pos - 1; j++, i = i.prox){}
+            for (int j = 0; j < pos - 1; j++, i = i.prox) {
+            }
             CelulaDupla tmp = new CelulaDupla(x);
             tmp.prox = i.prox;
-            i.prox= tmp;
+            i.prox = tmp;
             tmp.ant = i;
             tmp.prox.ant = tmp;
             i = tmp = null;
@@ -271,4 +272,3 @@ class ListaDupla{
         return tam;
     }
 }
-

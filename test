@@ -1,0 +1,16 @@
+------JAVA------
+class CelulaDupla<ELEMENTO> 
+CelulaDupla<String> celulaNome = new CelulaDupla<>();
+i.elemento.equals(valor)
+tmp.prox.nome.compareTo(novo.nome) < 0
+!Character.isDigit(entrada.charAt(j))
+------C------
+Ceulula tmp = (Celula*) mallloc(sizeof(Celula));
+// Atribuir valores a tmp
+strlen(string);
+strcmp(string1, string2);
+strcpy(string, string2);
+string = [strcspn(string, "\n")] = '\0';
+tmp = NULL;
+// strcat junta s2 ao final de s1
+    strcat(s1, s2);
